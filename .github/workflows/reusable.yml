@@ -1,8 +1,24 @@
 name: reusable workflow
-on: workflow_call 
+on: 
+  workflow_call:
+    inputs:
+      arg1:
+        description: arg number 1, required
+        required: true
+        type: string
+      arg2:
+        description: arg number 2, optional
+        required: false
+        type: string
+        default: Value2
+
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
       - name: Do the job
         run: echo "Doing ..."
+      - name: Use arg1
+        run: echo "ARG1 = ${{ inputs.arg1 }}"
+      - name: Use arg2
+        run: echo "ARG2 = ${{ inputs.arg2 }}"
