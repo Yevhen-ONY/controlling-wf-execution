@@ -15,9 +15,18 @@ on:
     secrets:
       MY_SECRET:
 
+    outputs:
+      result:
+        description: result of the reusable workflow 
+        value: ${{ jobs.job1.outputs.job_result}}
+
 jobs:
   job1:
     runs-on: ubuntu-latest
+    env:
+      VALUE: "123qwe"
+    outputs:
+      job_result: ${{ steps.set-result.outputs.step_result }}
     steps:
       - name: Do the job
         run: echo "Doing ..."
@@ -27,3 +36,6 @@ jobs:
         run: echo "ARG2 = ${{ inputs.arg2 }}"
       - name: Check secret
         run: echo "My secret is = ${{secrets.MY_SECRET}}"
+      - name: Set result
+        id: set-result
+        run: echo "step_result=$VALUE" >> $GITHUB_OUTPUT

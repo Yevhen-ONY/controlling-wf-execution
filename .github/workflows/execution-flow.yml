@@ -17,3 +17,9 @@ jobs:
       arg1: "value one"
     secrets:
       MY_SECRET: ${{ secrets.MY_SECRET }}
+
+  check:
+    needs: reusable
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "resutl = ${{ needs.reusable.outputs.result }}"
