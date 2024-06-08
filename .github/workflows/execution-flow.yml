@@ -8,10 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Secret 
-        run: echo "My secret is = ${{secrets.MY_SECRET}}"
+        run: echo "My secret is = ${{ secrets.MY_SECRET }}"
 
   reusable:
     needs: lint 
     uses: ./.github/workflows/reusable.yml
     with:
       arg1: "value one"
+    secrets:
+      MY_SECRET: ${{ secrets.MY_SECRET }}

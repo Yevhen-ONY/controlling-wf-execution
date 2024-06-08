@@ -12,6 +12,9 @@ on:
         type: string
         default: Value2
 
+    secrets:
+      MY_SECRET:
+
 jobs:
   job1:
     runs-on: ubuntu-latest
